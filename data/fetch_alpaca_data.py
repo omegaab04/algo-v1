@@ -14,17 +14,7 @@ BASE_URL = os.getenv("ALPACA_BASE_URL", "https://paper-api.alpaca.markets")
 api = REST(API_KEY, API_SECRET, BASE_URL)
 
 def get_historical_data(symbol: str, timeframe: str = "1D", limit: int = 1000) -> pd.DataFrame:
-    """
-    Fetch historical OHLCV data for a given symbol and timeframe.
-    
-    Args:
-        symbol (str): Ticker symbol (e.g., "AAPL").
-        timeframe (str): Bar timeframe (e.g., "1Min", "5Min", "1H", "1D").
-        limit (int): Number of data points to fetch (max 10000).
-    
-    Returns:
-        pd.DataFrame: OHLCV DataFrame indexed by datetime.
-    """
+
     bars = api.get_bars(symbol, timeframe, limit=limit).df
     if bars.empty:
         raise ValueError(f"No data returned for {symbol}")
