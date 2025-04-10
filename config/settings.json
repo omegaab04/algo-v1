@@ -1,0 +1,12 @@
+{
+    "strategy": "hybrid",
+    "timeframe": "1D",
+    "bars_limit": 200,
+    "manual_mode": true,
+    "news_override": true,
+    "risk_limits": {
+      "max_positions": 5,
+      "max_position_size": 10000,
+      "max_total_exposure": 50000
+    }
+  }
