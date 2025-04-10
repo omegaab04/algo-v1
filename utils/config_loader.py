@@ -1,13 +1,11 @@
+import json
 import os
-from datetime import datetime
+from dotenv import load_dotenv
 
-LOG_FILE = "log.txt"
+def load_json(path: str) -> dict:
+    with open(path, "r") as f:
+        return json.load(f)
 
-def log(msg: str):
-    """Log message to console and file."""
-    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    full_msg = f"[{timestamp}] {msg}"
-    print(full_msg)
-
-    with open(LOG_FILE, "a") as f:
-        f.write(full_msg + "\n")
+def load_env():
+    """Loads .env variables."""
+    load_dotenv()
