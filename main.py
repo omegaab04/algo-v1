@@ -13,17 +13,13 @@ from news.news_monitor import monitor_trump_news
 from utils.logger import log
 from config.alpaca_keys import API_KEY, API_SECRET, BASE_URL
 
-# Config
-
-STRATEGY = "hybrid"           # Choose: 'momentum', 'meanrev', 'hybrid'
-SYMBOL = "AAPL"
+STRATEGY = "hybrid"            # Choose: 'momentum', 'meanrev', 'hybrid'
+SYMBOL = "AAPL"                # Choose your ticker
 TIMEFRAME = "1D"
 BARS_LIMIT = 200
-NEWS_OVERRIDE = True
-MANUAL_MODE = True            # ← NEW toggle for news-only + price mode
-SLEEP_INTERVAL = 60 * 5       # 5 min loop
-
-# Strategy loading
+SLEEP_INTERVAL = 60 * 5        # 5 min loop
+NEWS_OVERRIDE = True           # Block trades if risky Trump news detected
+MANUAL_MODE = False            # Set to True for news + price only
 
 def load_strategy(name: str):
     if name == "momentum":
@@ -35,50 +31,50 @@ def load_strategy(name: str):
     else:
         raise ValueError(f"Unknown strategy: {name}")
 
-# Main
 def main():
     strategy = load_strategy(STRATEGY)
-    log(f"🚀 Running strategy: {STRATEGY} on {SYMBOL}")
+    log(f"Running strategy: {STRATEGY} on {SYMBOL}")
     if MANUAL_MODE:
-        log("🧠 Manual Mode Active: Trading is disabled.")
+        log("Manual Mode: No trades will be executed.")
 
     while True:
         try:
-            # Fetching market data
+            # 1. Fetch market data
             df = get_historical_data(SYMBOL, timeframe=TIMEFRAME, limit=BARS_LIMIT)
             latest_price = df['close'].iloc[-1]
 
             if MANUAL_MODE:
-                # Manual monitor only
-                log(f"💰 Latest price for {SYMBOL}: ${latest_price:.2f}")
+                # Just display price and Trump news sentiment
+                log(f"Latest price for {SYMBOL}: ${latest_price:.2f}")
                 monitor_trump_news(trigger_threshold=-0.5)
-                log(f"⏱ Waiting {SLEEP_INTERVAL // 60} min before next check...\n")
+                log(f"Waiting {SLEEP_INTERVAL // 60} minutes...\n")
                 time.sleep(SLEEP_INTERVAL)
                 continue
 
-            # Signal
+            # 2. Generate signal
             df = strategy.generate_signals(df)
             latest_signal = df['signal'].iloc[-1]
 
-            # Trump news override
+            # 3. Check Trump news
             if NEWS_OVERRIDE and monitor_trump_news():
-                log("🚨 News override triggered — no trades executed.")
+                log("Trade blocked due to Trump news event.")
                 time.sleep(SLEEP_INTERVAL)
                 continue
 
-            # Risk limits
+            # 4. Check risk limits
             if is_risk_exceeded():
-                log("⛔ Risk limit exceeded — exiting loop.")
-                break
+                log("Risk limit exceeded — no trades placed.")
+                time.sleep(SLEEP_INTERVAL)
+                continue
 
-            # Executing trade
+            # 5. Execute trade
             current_pos = get_current_position(SYMBOL)
             execute_trade(SYMBOL, latest_signal, current_pos)
 
         except Exception as e:
-            log(f"⚠️ Error in main loop: {e}")
+            log(f"Error in main loop: {e}")
 
-        # Sleep until next cycle
+        # 6. Sleep before next cycle
         time.sleep(SLEEP_INTERVAL)
 
 if __name__ == "__main__":
