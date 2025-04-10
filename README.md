@@ -4,7 +4,7 @@ It includes cool features like news flashes on key issues in the world, risk con
 
 Not that you need to create, **at least**, a paper trading Alpaca API account in order to run this, as it depends on API keys and security codes that are unique to each user. 
 
-**DO NOT PUSH YOUR UNIQUE API KEYS TO GITHUB IF YOU ARE A CONTRIBUTOR.**
+#**DO NOT PUSH YOUR UNIQUE API KEYS TO GITHUB IF YOU ARE A CONTRIBUTOR.**
 
 ---
 
