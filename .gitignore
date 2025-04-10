@@ -1,43 +1,34 @@
-# Python bytecode/cache
 __pycache__/
 *.py[cod]
 *.pyo
 *.pyd
 *.so
 
-# Environment variables and API keys
 .env
 *.env
 
-# Jupyter/IPython files (optional)
 .ipynb_checkpoints/
 
-# Logs and reports
 log.txt
 logs/
 *.log
 
-# Data files
 *.csv
 data/cache/
 backtests/
 results/
 
-# IDE/editor settings
 .vscode/
 .idea/
 *.swp
 
-# Virtual environment
 venv/
 env/
 .venv/
 
-# OS generated files
 .DS_Store
 Thumbs.db
 
-# Distribution / packaging
 *.egg-info/
 dist/
 build/
