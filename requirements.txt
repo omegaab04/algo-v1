@@ -15,3 +15,4 @@ textblob>=0.17.1
 # Requests for news API
 requests>=2.28.0
 
+# pip install -r requirements.txt for all at once
