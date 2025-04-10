@@ -1,8 +1,8 @@
-My first public trading algorithm. This took me too damn long. 
+My first public trading algorithm. This took me way too damn long.
 
-It includes cool features like news flashes on key issues in the world, risk controls, multiple strategies and a backtesting folder with key metrics that can be analysed for mathematical confidence. 
+It includes cool features like news flashes on key global issues, built-in risk controls, multiple trading strategies, and a full backtesting module with performance metrics you can analyse for mathematical confidence.
 
-Not that you need to create, **at least**, a paper trading Alpaca API account in order to run this, as it depends on API keys and security codes that are unique to each user. 
+Note that you'll need to create, **at least**, a paper trading Alpaca API account to run this. The bot depends on API keys and security codes that are unique to each user.
 
 # DO NOT PUSH YOUR UNIQUE API KEYS TO GITHUB IF YOU ARE A CONTRIBUTOR.
 
