@@ -39,7 +39,7 @@ def monitor_trump_news(trigger_threshold=-0.5, display=True) -> bool:
             if keyword_hit:
                 log("Keyword alert: Tariff-related term detected.")
             if caps_alert:
-                log("CAPS ALERT: Headline contains intense capitalization.")
+                log("CAPS ALERT: Headline contains intense capitalisation.")
 
         if sentiment <= trigger_threshold or keyword_hit or caps_alert:
             override = True
