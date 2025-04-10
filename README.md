@@ -50,7 +50,6 @@ To run the strategy loop:
 ```bash
 python main.py
 ```
----
 
 To run in manual news-only mode, set `"manual_mode": true` in `settings.json`.
 
