@@ -52,10 +52,14 @@ python main.py
 ```
 ---
 
+To run in manual news-only mode, set `"manual_mode": true` in `settings.json`.
+
+---
+
 This project holds an MIT License.
 
 ---
 
 Email me if you would like to collaborate: adam.bouchenaf23@gmail.com
 
-To run in manual news-only mode, set `"manual_mode": true` in `settings.json`.
+
